@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>DiagnÛstico de Motores</title>
+<title>Diagn√≥stico de Motores</title>
 
 <style>
 body {
@@ -58,11 +58,11 @@ li {
 
 <body>
 
-<h1> DiagnÛstico de Falhas</h1>
+<h1> Diagn√≥stico de Falhas</h1>
 
 <div>
   <button id="pd" class="tipo" onclick="selecionar('pd')">Partida Direta</button>
-  <button id="rev" class="tipo" onclick="selecionar('rev')">Revers„o</button>
+  <button id="rev" class="tipo" onclick="selecionar('rev')">Revers√£o</button>
 </div>
 
 <br>
@@ -71,7 +71,7 @@ li {
   <h2 id="pergunta"></h2>
 
   <button class="resposta" onclick="responder('sim')">SIM</button>
-  <button class="resposta" onclick="responder('nao')">N√O</button>
+  <button class="resposta" onclick="responder('nao')">N√ÉO</button>
 
   <br><br>
   <button onclick="iniciar()">Reiniciar</button>
@@ -105,20 +105,20 @@ function iniciar() {
 function mostrarPergunta() {
 
   const perguntasPD = {
-    1: "Tem tens„o na entrada do disjuntor?",
-    2: "O disjuntor est· armado?",
-    3: "Chega tens„o na bobina do contator?",
-    4: "A bobina tem resistÍncia?",
+    1: "Tem tens√£o na entrada do disjuntor?",
+    2: "O disjuntor est√° armado?",
+    3: "Chega tens√£o na bobina do contator?",
+    4: "A bobina tem resist√™ncia?",
     5: "O contator atraca?",
     6: "O motor gira?"
   };
 
   const perguntasREV = {
-    1: "Algum contator j· est· acionado?",
-    2: "KM1 e KM2 est„o ligados juntos?",
+    1: "Algum contator j√° est√° acionado?",
+    2: "KM1 e KM2 est√£o ligados juntos?",
     3: "O motor gira?",
     4: "Gira no sentido correto?",
-    5: "A revers„o funciona?"
+    5: "A revers√£o funciona?"
   };
 
   let pergunta = tipoSelecionado === "pd"
@@ -156,18 +156,18 @@ function responder(resp) {
   mostrarPergunta();
 }
 
-//  NOVO PADR√O PROFISSIONAL
+//  NOVO PADR√ÉO PROFISSIONAL
 function erro(tipo) {
 
   const erros = {
 
     falta_energia: {
       icone: "",
-      titulo: "Falta de alimentaÁ„o",
+      titulo: "Falta de alimenta√ß√£o",
       passos: [
-        "Verifique tens„o na entrada",
+        "Verifique tens√£o na entrada",
         "Confira disjuntor geral",
-        "Teste com multÌmetro",
+        "Teste com mult√≠metro",
         "Verifique cabos soltos"
       ]
     },
@@ -179,7 +179,7 @@ function erro(tipo) {
         "Rearme o disjuntor",
         "Verifique curto",
         "Confirme corrente",
-        "Inspecione fiaÁ„o"
+        "Inspecione fia√ß√£o"
       ]
     },
 
@@ -189,7 +189,7 @@ function erro(tipo) {
       passos: [
         "Verifique botoeiras",
         "Teste contatos",
-        "Confira fiaÁ„o",
+        "Confira fia√ß√£o",
         "Verifique selo"
       ]
     },
@@ -198,8 +198,8 @@ function erro(tipo) {
       icone: "",
       titulo: "Bobina queimada",
       passos: [
-        "Medir resistÍncia",
-        "Verificar tens„o",
+        "Medir resist√™ncia",
+        "Verificar tens√£o",
         "Trocar contator",
         "Checar sobrecarga"
       ]
@@ -207,12 +207,12 @@ function erro(tipo) {
 
     contator: {
       icone: "",
-      titulo: "Contator n„o aciona",
+      titulo: "Contator n√£o aciona",
       passos: [
         "Verificar travamento",
         "Limpar contatos",
         "Testar manual",
-        "Substituir se necess·rio"
+        "Substituir se necess√°rio"
       ]
     },
 
@@ -234,24 +234,24 @@ function erro(tipo) {
         "Verificar intertravamento",
         "Conferir contatos",
         "Revisar comando",
-        "Corrigir ligaÁ„o"
+        "Corrigir liga√ß√£o"
       ]
     },
 
     inversao_errada: {
       icone: "",
-      titulo: "Invers„o incorreta",
+      titulo: "Invers√£o incorreta",
       passos: [
         "Trocar duas fases",
-        "Testar rotaÁ„o",
-        "Verificar ligaÁ„o",
+        "Testar rota√ß√£o",
+        "Verificar liga√ß√£o",
         "Confirmar esquema"
       ]
     },
 
     nao_reverte: {
       icone: "",
-      titulo: "Motor n„o reverte",
+      titulo: "Motor n√£o reverte",
       passos: [
         "Verificar botoeira",
         "Testar contato auxiliar",
@@ -262,11 +262,11 @@ function erro(tipo) {
 
     motor_nao_liga: {
       icone: "",
-      titulo: "Motor n„o liga",
+      titulo: "Motor n√£o liga",
       passos: [
-        "Verificar alimentaÁ„o",
+        "Verificar alimenta√ß√£o",
         "Testar disjuntor",
-        "Medir tens„o",
+        "Medir tens√£o",
         "Verificar comando"
       ]
     }
@@ -275,7 +275,7 @@ function erro(tipo) {
 
   let e = erros[tipo];
 
-  document.getElementById("pergunta").innerText = "DiagnÛstico ";
+  document.getElementById("pergunta").innerText = "Diagn√≥stico ";
 
   document.getElementById("resultado").innerHTML = `
     <div style="
