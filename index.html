@@ -3,271 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análise de Motores Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    
+    <meta name="google" content="notranslate">
+    <title>Análise Técnica SENAI Pro</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
     <style>
         :root {
             --neon-blue: #00aaff;
             --neon-red: #ff4444;
-            --bg-dark: #0d0d0d;
-            --card-bg: #1a1a1a;
+            --bg-dark: #080808;
+            --card-bg: #121212;
+            --text-main: #e0e0e0;
         }
 
         body {
             font-family: 'Roboto', sans-serif;
             background-color: var(--bg-dark);
-            color: #e0e0e0;
+            color: var(--text-main);
             margin: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            padding: 15px;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        /* Container Principal Estilo Painel */
+        /* Container Principal */
         .dashboard {
-            width: 90%;
-            max-width: 450px;
+            width: 100%;
+            max-width: 500px;
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid #333;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 170, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #222;
             text-align: center;
-            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            margin-top: 20px;
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
             color: var(--neon-blue);
+            font-size: 1.4rem;
+            margin-bottom: 25px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            text-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+            text-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
         }
 
-        /* Seleção de Sistema */
-        .selector-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .btn-tipo {
-            flex: 1;
-            padding: 12px;
-            background: #252525;
-            border: 1px solid #444;
-            color: #888;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
+        /* Estilo dos Botões Principais */
+        .btn {
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 12px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            background: #1a1a1a;
+            color: #fff;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
-        }
-
-        .btn-tipo.active {
-            border-color: var(--neon-blue);
-            color: var(--neon-blue);
-            background: rgba(0, 170, 255, 0.1);
-            box-shadow: 0 0 15px rgba(0, 170, 255, 0.2);
-        }
-
-        /* Área de Perguntas */
-        .question-box {
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            animation: fadeIn 0.5s ease;
-        }
-
-        h2#pergunta {
-            font-size: 1.1rem;
-            font-weight: 300;
-            line-height: 1.5;
-            margin-bottom: 25px;
-        }
-
-        /* Botões de Ação */
-        .btn-action {
-            width: 100px;
-            padding: 12px;
-            margin: 0 10px;
-            border-radius: 5px;
-            border: 1px solid #555;
-            background: transparent;
-            color: white;
+            font-size: 1rem;
             cursor: pointer;
-            font-weight: bold;
+            text-transform: uppercase;
             transition: 0.2s;
         }
 
-        .btn-sim:hover { background: #28a745; border-color: #28a745; }
-        .btn-nao:hover { background: #dc3545; border-color: #dc3545; }
+        .btn:active { transform: scale(0.98); }
 
+        /* Botões de Ação (SIM/NÃO) */
+        .btn-action {
+            width: 46%;
+            display: inline-block;
+            margin: 5px 1%;
+            font-size: 1.1rem;
+            border: none;
+            font-weight: bold;
+        }
+        
+        .btn-sim { background-color: #28a745; color: white; }
+        .btn-nao { background-color: #dc3545; color: white; }
+
+        /* Card de Resultado */
+        .result-card {
+            background: #000;
+            border-left: 5px solid var(--neon-red);
+            padding: 20px;
+            text-align: left;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+
+        .result-card h3 { color: var(--neon-red); font-family: 'Orbitron'; margin-top: 0; }
+
+        /* Container do Diagrama Mermaid */
+        .mermaid-container {
+            background: white; /* Fundo branco ajuda a ler o diagrama no celular */
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        /* Texto da Pergunta */
+        #texto-pergunta {
+            font-size: 1.2rem;
+            margin: 35px 0;
+            min-height: 50px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Botão de Reset */
         .btn-reset {
-            margin-top: 30px;
             background: none;
             border: none;
-            color: #666;
+            color: var(--neon-blue);
             text-decoration: underline;
+            margin-top: 25px;
             cursor: pointer;
             font-size: 0.9rem;
         }
 
-        /* Card de Resultado (Onde entra o Mermaid) */
-        .result-card {
-            background: #000;
-            border-left: 4px solid var(--neon-red);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: left;
-            margin-top: 20px;
-            animation: slideUp 0.4s ease;
+        /* 1. ESTILO DA IMAGEM FIXA NO FINAL (Invertida) */
+        .footer-logo {
+            margin-top: 40px;
+            text-align: center;
+            padding-bottom: 20px;
         }
-
-        .result-card h3 {
-            color: var(--neon-red);
-            margin-top: 0;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
+        .footer-logo img {
+            width: 130px; /* Tamanho ajustado */
+            height: auto;
+            /* 2. MÁGICA: Inverte as cores (preto vira branco) */
+            filter: invert(1); 
+            opacity: 0.7; /* Um pouco transparente para não gritar na tela */
         }
-
-        .result-card ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .result-card li {
-            padding: 8px 0;
-            border-bottom: 1px solid #222;
-            font-size: 0.9rem;
-            color: #bbb;
-        }
-
-        .result-card li::before {
-            content: "⚡ ";
-        }
-
-        .mermaid-img {
-            width: 100%;
-            margin-top: 15px;
-            border: 1px solid #333;
-            border-radius: 5px;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
-<body>
+<body class="notranslate">
 
 <div class="dashboard">
-    <h1>Análise Técnica</h1>
+    <h1>Análise de Motores</h1>
 
-    <div class="selector-group">
-        <button id="pd" class="btn-tipo" onclick="selecionar('pd')">PARTIDA DIRETA</button>
-        <button id="rev" class="btn-tipo" onclick="selecionar('rev')">REVERSÃO</button>
+    <div id="tela-selecao">
+        <p style="margin-bottom: 20px; color: var(--neon-blue); font-size: 0.9rem;">Selecione o tipo de partida:</p>
+        <button class="btn" onclick="iniciar('pd')">Partida Direta</button>
+        <button class="btn" onclick="iniciar('rev')">Reversão</button>
     </div>
 
-    <div id="interface" style="display:none;">
-        <div class="question-box" id="caixaPergunta">
-            <h2 id="pergunta">Selecione um sistema acima para iniciar o rastreamento.</h2>
-            
-            <div id="botoesResposta">
-                <button class="btn-action btn-sim" onclick="responder('sim')">SIM</button>
-                <button class="btn-action btn-nao" onclick="responder('nao')">NÃO</button>
-            </div>
-        </div>
+    <div id="tela-perguntas" style="display:none;">
+        <div id="texto-pergunta"></div>
+        <button class="btn btn-action btn-sim" onclick="resposta('sim')">SIM</button>
+        <button class="btn btn-action btn-nao" onclick="resposta('nao')">NÃO</button>
+        <br>
+        <button class="btn-reset" onclick="voltar()">← Voltar ao início</button>
+    </div>
 
-        <div id="resultadoContainer"></div>
-
-        <button class="btn-reset" onclick="iniciar()">↻ Reiniciar Análise</button>
+    <div id="tela-resultado" style="display:none;">
+        <div id="conteudo-resultado"></div>
+        <button class="btn" style="margin-top:20px; border-color:var(--neon-blue)" onclick="voltar()">Nova Análise</button>
     </div>
 </div>
 
+<div class="footer-logo">
+    <img src="Https://i.postimg.cc/9QXXrbn4/images-(9).jpg" alt="Logo">
+</div>
+
 <script>
-let tipoSelecionado = "";
-let etapa = 1;
+    // Configuração do Mermaid (Usando tema claro para o diagrama aparecer no fundo branco)
+    mermaid.initialize({ startOnLoad: false, theme: 'default' });
 
-// DICIONÁRIO DE LINKS (Aqui você cola os links do Postimages que você gerar)
-const linksImagens = {
-    falta_energia: "https://mermaid.ink/img/pako:eNqVUU9vgjAc_SrNL9kNDGAB6cEF0O0yx4bbZeKho1WIQE0tUUf47quSLV52WC99r-9PD6-DXDAOBDaVOOYFlQq9zbIG6ROuXjQtGUVMoIVQQq6RaU5R1L22XL9OkW3d3feDOdISWpa1vkwUr-ZpmhCUzmdz9JCGcYiSdxSHUbJET8nzY7JcD6mDOlcchWhTVhX5rGi-Mw5Kih0nkjMjF5WQF3Rrjv5jjv8wD9A8lkwVBO9Pt2kwYCtLBmRDqwM3oOayphcO3aU6A1XwmmdANGRU7jLIml6H9rT5EKIGomSrY1K02-KHtHtGFZ-VdCtp_dssecO4jEXbKCB4PL52AOngBMQJRi4ObN-aOK6LHc_S6hnIxBtZzsTHY8vBWvTd3oCv66_WyA88HPi25bmuYzvYAM5KPdpi2Pc6c_8N5N2aig?type=png",
-    curto_reversao: "https://mermaid.ink/img/pako:eNqlks9ugkAQxl9lM2c0uPJH9tBEhaOaqOmhxcOWHYEIu2ZZopZw6qP0UXyxIrZpe2vSOc2X-X7zHWYaSJRAYLAv1CnJuDZkG8aSdDV9jqTRXHAikEQSdZrzHRkMHsisWaDINdmirK7vqr37Z92MxGA_khANJoYLFUPvnz9H6_WKkU20INtoubm-rchyStZRGO1ieacrcymQTMk-Lwr2UvDkYFVGqwN2osbPfnDKhckYPZ6tRBVKM43iJz77Hz7_E-78xsGCVOcC2J4XFVpQoi75TUNz2x2DybDEGFjXCq4PMcSy7aAjl09KlcCM7hJAqzrNvkR9FNxgmPNU828HSoF6rmppgDnU7VcAa-AMjAZD1wlGvj2hrutQzx5bcAE28YY2nfjO2KZON_Td1oLXPtQe-oHnBP7I9lyXjqhjQXdSo_Ti_g79V7QfhimvAQ?type=png",
-    // Adicione os outros conforme você for subindo no Postimages
-};
+    let tipoPartida = "";
+    let etapa = 0;
 
-function selecionar(tipo) {
-    tipoSelecionado = tipo;
-    document.getElementById("pd").classList.toggle("active", tipo === "pd");
-    document.getElementById("rev").classList.toggle("active", tipo === "rev");
-    document.getElementById("interface").style.display = "block";
-    iniciar();
-}
-
-function iniciar() {
-    etapa = 1;
-    document.getElementById("resultadoContainer").innerHTML = "";
-    document.getElementById("caixaPergunta").style.display = "flex";
-    mostrarPergunta();
-}
-
-function mostrarPergunta() {
-    const perguntasPD = {
-        1: "O disjuntor de força está alimentado na entrada?",
-        2: "O comando (botoeiras/emergência) está fechado?",
-        3: "A bobina do contator recebe sinal ao pulsar?",
-        4: "O motor emite ruído ou tenta girar?",
+    // BANCO DE PERGUNTAS (Sem o erro 'undefined')
+    const perguntas = {
+        pd: [
+            "O disjuntor geral tem tensão na entrada (L1/L2/L3)?",
+            "O motor gira livremente com a mão?",
+            "Os contatos do contator fecham ao pulsar o botão liga?"
+        ],
+        rev: [
+            "O intertravamento elétrico está impedindo acionamento duplo?",
+            "O motor inverte o sentido de rotação?",
+            "A tensão chega nas 3 fases do motor nos dois sentidos?"
+        ]
     };
 
-    const perguntasREV = {
-        1: "O intertravamento elétrico está impedindo os dois acionarem?",
-        2: "Os contatores KM1 e KM2 acionam de forma independente?",
-        3: "O motor inverte a rotação ao trocar o comando?",
-    };
-
-    let p = tipoSelecionado === "pd" ? perguntasPD[etapa] : perguntasREV[etapa];
-    document.getElementById("pergunta").innerText = p;
-}
-
-function responder(resp) {
-    if (tipoSelecionado === "pd") {
-        if (etapa === 1 && resp === "nao") return exibirErro("FALHA DE ENERGIA", ["Checar cabos de entrada", "Verificar concessionária"], linksImagens.falta_energia);
-        if (etapa === 2 && resp === "nao") return exibirErro("CIRCUITO DE COMANDO ABERTO", ["Verificar Botão Emergência", "Testar continuidade do cabo 01"]);
-        if (etapa === 4 && resp === "nao") return exibirErro("FALHA MECÂNICA / FASE", ["Verificar eixo travado", "Medir corrente nas 3 fases"]);
-        if (etapa === 4 && resp === "sim") return exibirSucesso();
-    } else {
-        if (etapa === 1 && resp === "nao") return exibirErro("RISCO DE CURTO-CIRCUITO", ["Revisar intertravamento KM1/KM2", "Trocar contatos auxiliares"], linksImagens.curto_reversao);
-        if (etapa === 3 && resp === "nao") return exibirErro("ERRO DE LIGAÇÃO", ["Trocar as fases na saída de KM2", "Verificar jumpers de potência"]);
-        if (etapa === 3 && resp === "sim") return exibirSucesso();
+    function iniciar(t) {
+        tipoPartida = t;
+        etapa = 0;
+        document.getElementById('tela-selecao').style.display = 'none';
+        document.getElementById('tela-perguntas').style.display = 'block';
+        atualizarTexto();
     }
-    etapa++;
-    mostrarPergunta();
-}
 
-function exibirErro(titulo, dicas, img) {
-    document.getElementById("caixaPergunta").style.display = "none";
-    let html = `
-        <div class="result-card">
-            <h3>⚠ ${titulo}</h3>
-            <ul>${dicas.map(d => `<li>${d}</li>`).join('')}</ul>
-            ${img ? `<img src="${img}" class="mermaid-img">` : ''}
-        </div>`;
-    document.getElementById("resultadoContainer").innerHTML = html;
-}
+    function atualizarTexto() {
+        // Correção para não dar erro se a etapa passar do limite
+        if (etapa < perguntas[tipoPartida].length) {
+            document.getElementById('texto-pergunta').innerText = perguntas[tipoPartida][etapa];
+        } else {
+            sucesso();
+        }
+    }
 
-function exibirSucesso() {
-    document.getElementById("caixaPergunta").style.display = "none";
-    document.getElementById("resultadoContainer").innerHTML = `
-        <div class="result-card" style="border-color: #28a745;">
-            <h3 style="color: #28a745;">✓ SISTEMA OPERACIONAL</h3>
-            <p>Todos os testes de continuidade e lógica foram aprovados.</p>
-        </div>`;
-}
+    function resposta(r) {
+        if (tipoPartida === 'pd') {
+            if (etapa === 0 && r === 'nao') return fim("FALHA DE ENERGIA", "graph TD\nA[Entrada] --> B{Disjuntor Geral}\nB -->|OFF| C[Ligar Disjuntor]\nB -->|ON| D[Checar Fusíveis]");
+            if (etapa === 1 && r === 'nao') return fim("FALHA MECÂNICA", "graph TD\nA[Eixo Travado] --> B[Lubrificar/Trocar Rolamentos]");
+            if (etapa === 2 && r === 'nao') return fim("FALHA NO COMANDO", "graph TD\nA[Bobina] --> B{Tem Tensão?}\nB -->|Não| C[Checar Botoeira/Emergência]");
+            if (etapa === 2 && r === 'sim') return sucesso();
+        } else {
+            if (etapa === 0 && r === 'nao') return fim("ERRO DE TRAVAMENTO", "graph LR\nK1 ---|CURTO| K2\nK2 -->|CORREÇÃO| I[Revisar Contatos Auxiliares]");
+            if (etapa === 1 && r === 'nao') return fim("ERRO DE FASES", "graph TD\nA[Motor não inverte] --> B[Inverter L1 e L3 no KM2]\nB --> C[Testar Novamente]");
+            if (etapa === 2 && r === 'nao') return fim("FALHA DE SAÍDA", "graph TD\nA[Falta de Fase] --> B[Medir Multímetro]\nB --> C[Revisar Fiação Potência]");
+            if (etapa === 2 && r === 'sim') return sucesso();
+        }
+        
+        etapa++;
+        atualizarTexto();
+    }
+
+    function fim(titulo, code) {
+        document.getElementById('tela-perguntas').style.display = 'none';
+        document.getElementById('tela-resultado').style.display = 'block';
+        
+        document.getElementById('conteudo-resultado').innerHTML = `
+            <div class="result-card">
+                <h3>⚠ ${titulo}</h3>
+                <p>Siga o diagrama abaixo para resolver:</p>
+                <div class="mermaid-container"><div class="mermaid">${code}</div></div>
+            </div>`;
+        
+        // Renderizar o diagrama Mermaid
+        mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    }
+
+    function sucesso() {
+        document.getElementById('tela-perguntas').style.display = 'none';
+        document.getElementById('tela-resultado').style.display = 'block';
+        document.getElementById('conteudo-resultado').innerHTML = `
+            <div class="result-card" style="border-color:#28a745">
+                <h3 style="color:#28a745">✓ SISTEMA OK</h3>
+                <p>O circuito passou nos testes básicos de rastreamento.</p>
+            </div>`;
+    }
+
+    function voltar() {
+        tipoPartida = "";
+        etapa = 0;
+        document.getElementById('tela-resultado').style.display = 'none';
+        document.getElementById('tela-perguntas').style.display = 'none';
+        document.getElementById('tela-selecao').style.display = 'block';
+    }
 </script>
 </body>
 </html>
